@@ -1,5 +1,6 @@
 package entities.imp;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import entities.Cart;
@@ -7,33 +8,22 @@ import entities.Product;
 
 public class DefaultCart implements Cart{
 	
-	private Product[] products;
+	private ArrayList<Product> products = new ArrayList<>();
 
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
-		if (this.products == null) {
-			return true;
-		}
-		return false;
+		return this.products.isEmpty();
 	}
 
 	@Override
 	public void addProduct(Product product) {
 		// TODO Auto-generated method stub
-		if (this.products == null) {
-			this.products = new Product[1];
-			this.products[0] = product;
-		} else {
-			Product[] newCart = Arrays.copyOf(this.products, this.products.length + 1);
-			newCart[newCart.length - 1] = product;
-			this.products = newCart;
-		}
-		
+		this.products.add(product);
 	}
 
 	@Override
-	public Product[] getProducts() {
+	public ArrayList<Product> getProducts() {
 		// TODO Auto-generated method stub
 		return this.products;
 	}
@@ -41,9 +31,7 @@ public class DefaultCart implements Cart{
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		if (!this.isEmpty()) {
-			this.products = null;
-		}
+		this.products = new ArrayList<>();
 	}
 
 }
