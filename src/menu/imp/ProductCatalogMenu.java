@@ -27,7 +27,7 @@ public class ProductCatalogMenu implements Menu{
 		System.out.println("Enter product id to add it to the cart or 'menu' if you want to navigate back to main menu");
 		
 		while (true) {
-			System.out.println(Arrays.toString(instance.getProducts()));
+			System.out.println(instance.getProducts());
 			String input = sc.nextLine();
 			//when user type main menu
 			if (input.equalsIgnoreCase(MainMenu.MENU_COMMAND)) {
@@ -50,11 +50,17 @@ public class ProductCatalogMenu implements Menu{
 			} else {
 				try {
 					Product productToAdd = instance.getProductById(Integer.valueOf(input));
-					context.getSessionCart().addProduct(productToAdd);
+					if (productToAdd != null) {
+						context.getSessionCart().addProduct(productToAdd);
 						
-					System.out.println("Product " + productToAdd.getProductName() + " has been added to your cart. If you want to add a"
-							+ " new product - enter product id. If you want to proceed with checkout - enter word 'checkout' to console");
-					continue;
+						System.out.println("Product " + productToAdd.getProductName() + " has been added to your cart. If you want to add a"
+								+ " new product - enter product id. If you want to proceed with checkout - enter word 'checkout' to console");
+						continue;
+					} else {
+						throw new IllegalArgumentException();
+					}
+					
+					
 				} catch (Exception e) {
 					System.out.println("Please, enter product ID if you want to add product to cart. "
 							+ "Or enter 'checkout' if you want to proceed with checkout. "
