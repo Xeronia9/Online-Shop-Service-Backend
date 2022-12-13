@@ -1,13 +1,15 @@
 package services;
 
+import java.util.ArrayList;
+
 import entities.Order;
 
 public interface OrderManagementService {
 	
 	void addOrder(Order order);
 	
-	Order[] getOrderByUserId(int userId);
+	ArrayList<Order> getOrderByUserId(int userId);
 	
-	Order[] getOrders();
+	ArrayList<Order> getOrders();
 
 }

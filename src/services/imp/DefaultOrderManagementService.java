@@ -1,5 +1,6 @@
 package services.imp;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import entities.Order;
@@ -7,11 +8,9 @@ import services.OrderManagementService;
 
 public class DefaultOrderManagementService implements OrderManagementService{
 	
-	private static final int DEFAULT_ORDER_CAPACITY = 10;
-	
 	private static DefaultOrderManagementService instance;
 	
-	private Order[] orders;
+	private ArrayList<Order> orders = new ArrayList<>();
 	
 	private DefaultOrderManagementService() {
 		
@@ -27,49 +26,33 @@ public class DefaultOrderManagementService implements OrderManagementService{
 	@Override
 	public void addOrder(Order order) {
 		// TODO Auto-generated method stub
-		if (orders == null) {
-			orders = new Order[1];
-			orders[0] = order;
-		}else {
-			Order[] copyOrders = Arrays.copyOf(orders, orders.length + 1);
-			copyOrders[copyOrders.length - 1] = order;
-			orders = copyOrders;
-		}
-		
-		
+		this.orders.add(order);	
 	}
 
 	@Override
-	public Order[] getOrderByUserId(int userId) {
-		int numberOfOrders = 0;
-		if (orders == null) {
+	public ArrayList<Order> getOrderByUserId(int userId) {
+		if (this.orders.isEmpty()) {
 			return null;
 		}
+		
+		ArrayList<Order> ordersBySameUser = new ArrayList<>();
 		for (Order order:orders) {
 			if (order.getCustomerId() == userId) {
-				numberOfOrders++;
-			}
-		}
-		Order[] ordersBySameUser = new Order[numberOfOrders];
-		int i = 0;
-		for (Order order:orders) {
-			if (order.getCustomerId() == userId) {
-				ordersBySameUser[i] = order;
-				i++;
+				ordersBySameUser.add(order);
 			}
 		}
 		return ordersBySameUser;
 	}
 
 	@Override
-	public Order[] getOrders() {
+	public ArrayList<Order> getOrders() {
 		// TODO Auto-generated method stub
-		return orders;
+		return this.orders;
 	}
 	
 	void clearServiceState() {
 		//TODO write clear service code
-		orders = null;
+		this.orders.clear();
 	}
 
 }

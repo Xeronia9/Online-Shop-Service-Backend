@@ -1,10 +1,12 @@
 package services;
 
+import java.util.ArrayList;
+
 import entities.Product;
 
 public interface ProductManagementService {
 	
-	Product[] getProducts();
+	ArrayList<Product> getProducts();
 	
 	Product getProductById(int productIdToAddToCart);
 

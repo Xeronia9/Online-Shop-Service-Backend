@@ -1,5 +1,6 @@
 package entities.imp;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import entities.Order;
@@ -10,7 +11,7 @@ public class DefaultOrder implements Order{
 	private static final int AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER = 16;
 	
 	private String creditCardNumber;
-	private Product[] products;
+	private ArrayList<Product> products = new ArrayList<>();
 	private int customerId;
 
 	@Override
@@ -30,7 +31,7 @@ public class DefaultOrder implements Order{
 	}
 
 	@Override
-	public void setProducts(Product[] products) {
+	public void setProducts(ArrayList<Product> products) {
 		// TODO Auto-generated method stub
 		this.products = products;
 		
@@ -51,7 +52,7 @@ public class DefaultOrder implements Order{
 	
 	@Override
 	public String toString() {
-		return "Customer Id: " + this.customerId + "\nOrders: " + Arrays.toString(products) + "\nCredit card number: " + hideCreditCardNumber(this.creditCardNumber);
+		return "Customer Id: " + this.customerId + "\nOrders: " + this.products + "\nCredit card number: " + hideCreditCardNumber(this.creditCardNumber) + "\n";
 				
 	}
 	

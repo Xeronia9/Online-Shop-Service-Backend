@@ -1,5 +1,8 @@
 package services.imp;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import entities.Product;
 import entities.imp.DefaultProduct;
 import services.ProductManagementService;
@@ -8,7 +11,7 @@ public class DefaultProductManagementService implements ProductManagementService
 	
 	private static DefaultProductManagementService instance;
 	
-	private static Product[] products;
+	private static ArrayList<Product> products;
 	
 	static {
 		initProducts();
@@ -19,7 +22,7 @@ public class DefaultProductManagementService implements ProductManagementService
 	}
 	
 	private static void initProducts() {
-		products = new Product[] {
+		products = new ArrayList<>(Arrays.asList(
 				new DefaultProduct("Tsuki ga kirei", "Romance", 5.0 , 1),
 				new DefaultProduct("Kimetsu no yaiba", "Action", 10.0, 2),
 				new DefaultProduct("One piece", "Adventure", 40.0, 3),
@@ -27,11 +30,11 @@ public class DefaultProductManagementService implements ProductManagementService
 				new DefaultProduct("Death note", "Thriller", 15.0, 5),
 				new DefaultProduct("Dxd", "Ecchi", 7.0, 6),
 				new DefaultProduct("Akame ga kill", "Gore", 8.0, 7)
-		};
+		));
 	}
 
 	@Override
-	public Product[] getProducts() {
+	public ArrayList<Product> getProducts() {
 		// TODO Auto-generated method stub
 		return products;
 	}
@@ -39,9 +42,9 @@ public class DefaultProductManagementService implements ProductManagementService
 	@Override
 	public Product getProductById(int productIdToAddToCart) {
 		// TODO Auto-generated method stub
-		for (int i = 0;i < products.length;i++) {
-			if (productIdToAddToCart == products[i].getId()) {
-				return products[i];
+		for (Product product:products) {
+			if (productIdToAddToCart == product.getId()) {
+				return product;
 			}
 		}
 		return null;

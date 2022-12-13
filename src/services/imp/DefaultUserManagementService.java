@@ -1,5 +1,6 @@
 package services.imp;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import entities.User;
@@ -13,7 +14,7 @@ public class DefaultUserManagementService implements UserManagementService {
 	
 	private static DefaultUserManagementService instance;
 	
-	private User[] users;
+	private ArrayList<User> users = new ArrayList<>();
 	
 	private DefaultUserManagementService() {
 		
@@ -27,42 +28,32 @@ public class DefaultUserManagementService implements UserManagementService {
 		if (!errorMessage.equals("")) {
 			return errorMessage;
 		}
-		if (users == null) {
-			users = new User[1];
-			users[0] = user;
-		} else {
-			User[] copyUsers = Arrays.copyOf(users, users.length + 1);
-			copyUsers[copyUsers.length - 1] = user;
-			users = copyUsers;
-			
-		}
+		this.users.add(user);
 		return errorMessage;
 	}
 
 	@Override
-	public User[] getUsers() {
+	public ArrayList<User> getUsers() {
 		// TODO Auto-generated method stub
-		if (users == null) {
-			users = new User[0];
-		}
+		
 		return users;
 	}
 
 	@Override
 	public User getUserByEmail(String email) {
-		if (users == null) {
+		if (users.isEmpty()) {
 			return null;
 		}
-		for (int i = 0;i < users.length;i++) {
-			if (users[i].getEmail().equals(email)) {
-				return users[i];
+		for (int i = 0;i < users.size();i++) {
+			if (users.get(i).getEmail().equals(email)) {
+				return users.get(i);
 			}
 		}
 		return null;
 	}
 	
 	void clearServiceState() {
-		users = null;
+		users.clear();
 	}
 	
 	public static UserManagementService getInstance() {

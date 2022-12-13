@@ -1,12 +1,14 @@
 package services;
 
+import java.util.ArrayList;
+
 import entities.User;
 
 public interface UserManagementService {
 
 	String registerUser(User user);
 	
-	User[] getUsers();
+	ArrayList<User> getUsers();
 	
 	User getUserByEmail(String email);
 

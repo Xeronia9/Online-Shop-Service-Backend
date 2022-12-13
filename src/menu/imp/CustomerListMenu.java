@@ -19,7 +19,7 @@ public class CustomerListMenu implements Menu{
 	@Override
 	public void start() {
 		this.printMenuHeader();
-		System.out.println(Arrays.toString(instance.getUsers()));
+		System.out.println(instance.getUsers());
 		context.getMainMenu().start();
 	}
 
