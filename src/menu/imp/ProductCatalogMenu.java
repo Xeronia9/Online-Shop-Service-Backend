@@ -1,6 +1,5 @@
 package menu.imp;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 import configs.ApplicationContext;

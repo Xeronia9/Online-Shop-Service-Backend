@@ -1,8 +1,6 @@
 package entities.imp;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import entities.Cart;
 import entities.Product;
 
